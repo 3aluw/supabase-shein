@@ -4,6 +4,9 @@
             <v-btn variant="flat" color="red-accent-2" class="font-bold px-4 mr-auto rounded" @click="signInWithGoogle">
                 تسجيل الدخول
             </v-btn>
+            <v-btn variant="flat" color="red-accent-2" class="font-bold px-4 mr-auto rounded" @click="logOut">
+                تسجيل الخروج
+            </v-btn>
         </nav>
         <div class="product-categories flex flex-wrap gap-8">
             <div class="category-card w-36 flex flex-col items-center gap-2" v-for="category in productCategories">
@@ -27,7 +30,6 @@ console.log(user.value);
 
     // The custom claims are directly on the decoded payload
     const userRole = decodedToken.user_role;
-    console.log("User role from JWT:", userRole);
  }
 const signInWithGoogle = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
@@ -38,5 +40,8 @@ const signInWithGoogle = async () => {
 })
   if (error) console.log(error)
 }
-
+const logOut = async()=>{
+  const { error } = await supabase.auth.signOut()
+   if (error) console.log(error)
+}
 </script>
